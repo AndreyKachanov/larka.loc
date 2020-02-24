@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Entity\User\User;
 use Faker\Generator as Faker;
 

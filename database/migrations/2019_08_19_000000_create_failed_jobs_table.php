@@ -6,6 +6,10 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFailedJobsTable extends Migration
 {
+    const a = 1;
+
+    const b = 2;
+
     /**
      * Run the migrations.
      *
