@@ -1,1 +1,190 @@
-//
+
+
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import "~font-awesome/scss/font-awesome.scss";
+
+
+#app {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+}
+
+.navbar {
+  background-color: #0c64a2;
+  padding: 0.35rem 1rem;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+}
+
+.table th, .table td {
+  padding: 0.55rem 0.75rem;
+}
+
+.adverts-list {
+  .advert {
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
+
+.search-bar {
+  background: #e9ecef;
+}
+
+.breadcrumb {
+  background: none;
+  padding: 0;
+}
+
+.banner {
+  border: 1px solid #ddd;
+}
+
+//Messages table
+.table-messages td {
+  font: 90% Helvetica, sans-serif;
+}
+
+
+.currencies {
+  .card-body {
+    min-height: 50vh;
+  }
+}
+
+.nav-item.active>.nav-link, .navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link {
+  background-color: rgba(255,255,255,.1);
+}
+
+.waves-effect {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-link {
+  display: block;
+  padding: .35rem 1rem;
+}
+
+.navbar-jira {
+  background-color: #495057;
+  padding: .5rem 1rem;
+}
+
+//стриница операторов Jira
+.operators {
+  .h5 {
+    margin: 20px 0px 10px 0px;
+  }
+
+  .line1 {
+    counter-reset: counter1;
+  }
+
+  .line2 {
+    counter-reset: counter2;
+  }
+
+  .line1 th[scope='row']::before {
+    counter-increment: counter1;
+    content: counter(counter1);
+  }
+
+  .line2 th[scope='row']::before {
+    counter-increment: counter2;
+    content: counter(counter2);
+  }
+
+  .line1 tr td:nth-child(3), .line2 tr td:nth-child(3) {
+    width: 200px;
+  }
+}
+.chartjs {
+  //padding-top: 20px;
+}
+
+.chartjs table {
+  border: 2px solid #42b983;
+  border-radius: 3px;
+  background-color: #fff;
+  border-collapse: separate;
+  border-spacing: 2px;
+
+  th {
+    background-color: #42b983;
+    color: #fff;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -user-select: none;
+    font-family: Lato, sans-serif !important;
+    font-size: 12px !important;
+    word-break: break-word;
+    font-weight: bold !important;
+  }
+
+  td {
+    background-color: #f9f9f9;
+    color: #666;
+  }
+
+  th,
+  td {
+    min-width: 120px;
+    padding: 7px 20px;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+  }
+}
+
+table#table-transition-example .flip-list-move {
+  transition: transform 1s;
+}
+.nav-pills a {
+  font-size: 13px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: #42b983;
+}
+
+.nav-link {
+  padding: 0.2rem 0.73rem;
+
+}
+
+.nav-pills .nav-link.red {
+  background-color: #f0ad4e;
+  color: #4c1010;
+}

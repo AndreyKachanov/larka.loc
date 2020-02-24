@@ -17,3 +17,6 @@ yarn-error.log
 public/storage
 public/hot
 storage/*.key
+
+.php_cs.cache
+/public/build
