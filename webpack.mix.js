@@ -4,7 +4,7 @@ let webpack = require('webpack');
 
 const env = process.env.APP_ENV;
 
-if (env == 'production' || env == 'dev') {
+if (env === 'production' || env === 'dev') {
     mix
         .js('resources/js/app.js', 'public/js')
         .sass('resources/sass/app.scss', 'public/css')

@@ -1,5 +1,7 @@
 <?php
 
+use App\Entity\User\User;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 Route::get('/login/phone', 'Auth\LoginController@phone')->name('login.phone');
@@ -45,3 +47,8 @@ Route::group(
         Route::resource('currencies', 'VkParsingPostsController')->only(['index']);
     }
 );
+
+
+Route::get('test/{id}', function () {
+    dd("123");
+})->where('id', '[0-9]+');
