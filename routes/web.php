@@ -42,13 +42,40 @@ Route::group(
             Route::put('/phone', 'PhoneController@verify')->name('phone.verify');
             Route::post('/phone/auth', 'PhoneController@auth')->name('phone.auth');
         });
-
-        Route::resource('messages', 'MessageController')->only(['index']);
-        Route::resource('currencies', 'VkParsingPostsController')->only(['index']);
     }
 );
 
 
-Route::get('test/{id}', function () {
-    dd("123");
-})->where('id', '[0-9]+');
+//Route::get('test/{id}', function () {
+//    dd("123");
+//})->where('id', '[0-9]+');
+
+Route::apiResource('tasks', 'TestController');
+
+
+Route::get('test2/{user}/update', 'Test2Controller');
+
+Route::get('users/{user}', function (User $user) {
+    //$user = User::findOrFail($id);
+    dd($user);
+});
+
+Route::get('test3', function (Illuminate\Foundation\Application $app) {
+    dd($app);
+});
+
+//Route::view('test4', 'layouts.master', [
+//    'users' => User::all()
+//]);
+//
+//Route::view('test5', 'layouts.dashboard', [
+//    'users' => User::all()
+//]);
+//
+//Route::view('test6', 'layouts.include', [
+//    'pageName' => 'Page Name',
+//    'text' => 'text бла бла бла',
+//    'users' => User::all()
+//]);
+//
+//Route::view('test7', 'layouts.components');

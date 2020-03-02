@@ -62,7 +62,7 @@ class User extends Authenticatable
         'verify_token',
         'status',
         'email_verified_at',
-        'role'
+        //'role'
     ];
 
     /**

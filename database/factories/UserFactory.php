@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'phone_verified' => false,
         'phone_verify_token' => null,
         'phone_verify_token_expire' => null,
-        'role' => User::ROLE_USER,
+        'role_id' => 3,
         'status' => User::STATUS_WAIT,
         'remember_token' => null
     ];

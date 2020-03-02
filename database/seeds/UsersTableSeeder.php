@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
                     'created_at'        => Carbon::now(),
                     'updated_at'        => Carbon::now(),
                     'status'            => User::STATUS_ACTIVE,
-                    'role'              => User::ROLE_ADMIN,
+                    'role_id'           => 1,
                     'password'          => Hash::make('qwerty')
                 ]);
 
