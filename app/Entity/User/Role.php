@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use App\Entity\Post;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,5 +30,10 @@ class Role extends Model
     public function rUsers()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasManyThrough(Post::class, User::class);
     }
 }
