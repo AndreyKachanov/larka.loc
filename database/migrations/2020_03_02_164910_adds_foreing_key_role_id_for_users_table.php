@@ -13,7 +13,7 @@ class AddsForeingKeyRoleIdForUsersTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
+        //Schema::disableForeignKeyConstraints();
         Schema::table('users', function (Blueprint $table) {
             //создаем  индекс для role_id
             $table->index(['role_id'], 'idx_role_id');
@@ -25,7 +25,7 @@ class AddsForeingKeyRoleIdForUsersTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
-        Schema::enableForeignKeyConstraints();
+        //Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -37,8 +37,8 @@ class AddsForeingKeyRoleIdForUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             if (Schema::hasColumn('users', 'role_id')) {
-                $table->dropForeign('idx_role_id');
-                $table->dropIndex('fk_role');
+                $table->dropForeign('fk_role');
+                $table->dropIndex('idx_role_id');
             }
         });
     }

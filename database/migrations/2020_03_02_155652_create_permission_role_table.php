@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolePermissionTable extends Migration
+class CreatePermissionRoleTable extends Migration
 {
-    private $tableName = 'role_permission';
+    private $tableName = 'permission_role';
     /**
      * Run the migrations.
      *

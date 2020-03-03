@@ -17,17 +17,17 @@ use Faker\Generator as Faker;
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => null,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'phone' => null,
-        'phone_auth' => false,
-        'phone_verified' => false,
-        'phone_verify_token' => null,
+        'name'                      => $faker->name,
+        'email'                     => $faker->unique()->safeEmail,
+        'email_verified_at'         => null,
+        'role_id'                   => 3, // User
+        'password'                  => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'phone'                     => '38099' . mt_rand(1111111, 9999999),
+        'phone_auth'                => false,
+        'phone_verified'            => false,
+        'phone_verify_token'        => null,
         'phone_verify_token_expire' => null,
-        'role_id' => 3,
-        'status' => User::STATUS_WAIT,
-        'remember_token' => null
+        'status'                    => User::STATUS_WAIT,
+        'remember_token'            => null
     ];
 });

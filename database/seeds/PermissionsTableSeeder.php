@@ -10,21 +10,21 @@ class PermissionsTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws Exception
      */
     public function run()
     {
+        if (Permission::count() != 0) {
+            throw new Exception('Permissions table is not empty. Stop all seeds!!!');
+        }
+
         $permissions = [
-            'Admin',
-            'Moderator',
-            'User'
+            'SHOW_USERS',
+            'EDIT_USERS'
         ];
 
-        if (App::environment('local')) {
-            if (Permission::count() == 0) {
-                foreach ($permissions as $permission) {
-                    Permission::create(['name' => $permission]);
-                }
-            }
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
         }
     }
 }

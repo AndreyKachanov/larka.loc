@@ -12,26 +12,43 @@ use Illuminate\Support\Str;
  * App\Entity\User\User
  *
  * @property int $id
- * @property string $name
+ * @property string|null $name
+ * @property string|null $password
  * @property string $email
  * @property string|null $email_verified_at
- * @property string $password
+ * @property int|null $role_id
+ * @property string|null $phone
+ * @property int $phone_auth
+ * @property bool $phone_verified
+ * @property string|null $phone_verify_token
+ * @property \Illuminate\Support\Carbon|null $phone_verify_token_expire
  * @property string|null $remember_token
+ * @property string|null $status
+ * @property string|null $verify_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @method static Builder|User newModelQuery()
- * @method static Builder|User newQuery()
- * @method static Builder|User query()
- * @method static Builder|User whereCreatedAt($value)
- * @method static Builder|User whereEmail($value)
- * @method static Builder|User whereEmailVerifiedAt($value)
- * @method static Builder|User whereId($value)
- * @method static Builder|User whereName($value)
- * @method static Builder|User wherePassword($value)
- * @method static Builder|User whereRememberToken($value)
- * @method static Builder|User whereUpdatedAt($value)
+ * @property-read \App\Entity\User\Role|null $rRole
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User wherePhoneAuth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User wherePhoneVerified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User wherePhoneVerifyToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User wherePhoneVerifyTokenExpire($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity\User\User whereVerifyToken($value)
  * @method static count()
  * @method static create(array $array)
  * @mixin \Eloquent
@@ -62,7 +79,7 @@ class User extends Authenticatable
         'verify_token',
         'status',
         'email_verified_at',
-        //'role'
+        'role_id'
     ];
 
     /**
@@ -236,5 +253,10 @@ class User extends Authenticatable
     public function hasFilledProfile(): bool
     {
         return !empty($this->name) && !empty($this->last_name) && $this->isPhoneVerified();
+    }
+
+    public function rRole()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 }
