@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use App\Traits\EloquentGetTableNameTrait;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -22,8 +23,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static count()
  * @method static create(array $array)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Entity\User\Role[] $rRoles
+ * @property-read int|null $r_roles_count
  */
 class Permission extends Model
 {
-    //
+    use EloquentGetTableNameTrait;
+
+    protected $table = 'permissions';
+
+    public function rRoles()
+    {
+        return $this->belongsToMany(Role::class, PermissionRoles::getTableName())
+            ->withPivot(['created_at', 'updated_at', 'test'])
+            ->as('membership');
+    }
 }

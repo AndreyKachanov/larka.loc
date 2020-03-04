@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use App\Traits\EloquentGetTableNameTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
@@ -55,8 +56,9 @@ use Illuminate\Support\Str;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    protected $table = 'users';
 
+    use Notifiable, EloquentGetTableNameTrait;
 
     public const STATUS_WAIT = 'wait';
     public const STATUS_ACTIVE = 'active';

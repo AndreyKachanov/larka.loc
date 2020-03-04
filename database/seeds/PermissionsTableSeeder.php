@@ -15,12 +15,14 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         if (Permission::count() != 0) {
-            throw new Exception('Permissions table is not empty. Stop all seeds!!!');
+            throw new Exception(Permission::getTableName() . ' table is not empty. Stop all seeds!!!');
         }
 
         $permissions = [
             'SHOW_USERS',
-            'EDIT_USERS'
+            'EDIT_USERS',
+            'SHOW_PERMISSIONS',
+            'EDIT_PERMISSIONS'
         ];
 
         foreach ($permissions as $permission) {

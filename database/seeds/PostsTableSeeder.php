@@ -15,7 +15,7 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         if (Post::count() != 0) {
-            throw new Exception('Posts table is not empty. Truncate all tables!');
+            throw new Exception(User::getTableName() . ' table is not empty. Truncate all tables!');
         }
 
         User::all()->each(function (User $user) {

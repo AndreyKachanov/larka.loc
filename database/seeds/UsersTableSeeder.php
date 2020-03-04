@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         if (User::count() != 0) {
-            throw new Exception('Users table is not empty. Stop all seeds!!!');
+            throw new Exception(User::getTableName() . ' table is not empty. Stop all seeds!!!');
         }
 
         User::create([

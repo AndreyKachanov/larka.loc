@@ -1,9 +1,11 @@
 <?php
 
+use App\Entity\User\Permission;
 use App\Entity\User\User;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Entity\User\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,9 +66,11 @@ Route::get('test3', function (Illuminate\Foundation\Application $app) {
     dd($app);
 });
 
-//Route::view('test4', 'layouts.master', [
-//    'users' => User::all()
-//]);
+Route::get('test4', function() {
+    Role::find(1)->rPermissions->each(function ($test) {
+        dump($test);
+    });
+});
 //
 //Route::view('test5', 'layouts.dashboard', [
 //    'users' => User::all()

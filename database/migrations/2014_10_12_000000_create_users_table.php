@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\User\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -7,6 +8,13 @@ use Illuminate\Database\Migrations\Migration;
 //@codingStandardsIgnoreLine
 class CreateUsersTable extends Migration
 {
+    private $usersTableName;
+
+    public function __construct()
+    {
+        $this->usersTableName = User::getTableName();
+    }
+
     /**
      * Run the migrations.
      *
@@ -14,8 +22,8 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('users')) {
-            Schema::create('users', function (Blueprint $table) {
+        if (!Schema::hasTable($this->usersTableName)) {
+            Schema::create($this->usersTableName, function (Blueprint $table) {
                 $table->smallIncrements('id');
                 $table->string('name')->nullable();
                 $table->string('password')->nullable();
@@ -46,6 +54,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists($this->usersTableName);
     }
 }

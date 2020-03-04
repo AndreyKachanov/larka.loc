@@ -15,13 +15,12 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         if (Role::count() != 0) {
-            throw new Exception('Roles table is not empty. Truncate all tables!');
+            throw new Exception(Role::getTableName() . ' table is not empty. Truncate all tables!');
         }
 
         $roles = [
             'Admin',
-            'Moderator',
-            'User'
+            'Moderator'
         ];
 
         foreach ($roles as $role) {
