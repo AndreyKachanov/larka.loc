@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\Contact;
 use App\Entity\User\Permission;
 use App\Entity\User\User;
 use App\Http\Controllers\HomeController;
@@ -70,6 +71,12 @@ Route::get('test4', function() {
     Role::find(1)->rPermissions->each(function ($test) {
         dump($test);
     });
+});
+
+Route::get('test5', function() {
+    $contact = Contact::first();
+    $contact->stars()->create();
+    dd($contact);
 });
 //
 //Route::view('test5', 'layouts.dashboard', [

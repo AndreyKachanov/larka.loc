@@ -29,4 +29,6 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use EloquentGetTableNameTrait;
+
+    protected $table = 'posts';
 }
