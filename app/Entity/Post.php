@@ -31,4 +31,10 @@ class Post extends Model
     use EloquentGetTableNameTrait;
 
     protected $table = 'posts';
+
+    public function stars()
+    {
+        return $this->morphOne(Star::class, 'starrable');
+    }
+
 }

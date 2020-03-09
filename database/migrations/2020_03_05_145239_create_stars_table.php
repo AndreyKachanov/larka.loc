@@ -24,6 +24,8 @@ class CreateStarsTable extends Migration
         if (!Schema::hasTable($this->starsTableName)) {
             Schema::create($this->starsTableName, function (Blueprint $table) {
                 $table->bigIncrements('id');
+                $table->string('name')->nullable();
+                $table->string('description')->nullable();
                 $table->unsignedSmallInteger('starrable_id')->nullable();
                 $table->string('starrable_type')->nullable();
                 $table->timestamps();

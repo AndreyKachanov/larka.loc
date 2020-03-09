@@ -19,6 +19,6 @@ class Contact extends Model
 
     public function stars()
     {
-        return $this->morphToMany(Star::class, 'starrable');
+        return $this->morphOne(Star::class, 'starrable');
     }
 }
