@@ -9,8 +9,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/src/index.scss';
 
 @import "~font-awesome/scss/font-awesome.scss";
+//@import "~summernote/dist/summernote-bs4.css";
 
 
 #app {
@@ -99,46 +101,48 @@ body {
   background-color: #495057;
   padding: .5rem 1rem;
 }
+
+
 .chartjs {
-  //padding-top: 20px;
+    //padding-top: 20px;
 }
 
 .chartjs table {
-  border: 2px solid #42b983;
-  border-radius: 3px;
-  background-color: #fff;
-  border-collapse: separate;
-  border-spacing: 2px;
+    border: 2px solid #42b983;
+    border-radius: 3px;
+    background-color: #fff;
+    border-collapse: separate;
+    border-spacing: 2px;
 
-  th {
-    background-color: #42b983;
-    color: #fff;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -user-select: none;
-    font-family: Lato, sans-serif !important;
-    font-size: 12px !important;
-    word-break: break-word;
-    font-weight: bold !important;
-  }
+    th {
+        background-color: #42b983;
+        color: #fff;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -user-select: none;
+        font-family: Lato, sans-serif !important;
+        font-size: 12px !important;
+        word-break: break-word;
+        font-weight: bold !important;
+    }
 
-  td {
-    background-color: #f9f9f9;
-    color: #666;
-  }
+    td {
+        background-color: #f9f9f9;
+        color: #666;
+    }
 
-  th,
-  td {
-    min-width: 120px;
-    padding: 7px 20px;
-    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-  }
+    th,
+    td {
+        min-width: 120px;
+        padding: 7px 20px;
+        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+    }
 }
 
 table#table-transition-example .flip-list-move {
-  transition: transform 1s;
+    transition: transform 1s;
 }

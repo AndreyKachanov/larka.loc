@@ -1,12 +1,18 @@
+<!--<template>-->
+<!--    <div>-->
+<!--        <b-table striped hover :items="items"></b-table>-->
+<!--    </div>-->
+<!--</template>-->
+
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="chartjs">
                     <b-table
                             id="table-transition-example"
-                            :fields="fields"
-                            :items="items"
+                            :items="itemsForTable"
+                            :fields="fieldsForTable"
                             striped
                             small
                             :primary-key="firstCell"
@@ -20,12 +26,12 @@
 
 <script>
     export default {
-        props: ['fields', 'items'],
+        props: ['data'],
 
         data: function () {
             return {
                 // dataForChartJs: this.data,
-                firstCell: 'Єдиний унікальний номер справи',
+                firstCell: 'age',
                 fieldsForTable: [
                     { key: 'age', sortable: true },
                     { key: 'last_name', sortable: true },

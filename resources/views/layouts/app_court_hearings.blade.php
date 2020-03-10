@@ -17,7 +17,7 @@
     <div id="app">
         <header>
             <nav class="navbar navbar-expand-md navbar-dark">
-                <div class="container">
+                <div class="container-fluid">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.author') }}
                     </a>
@@ -30,13 +30,13 @@
         </header>
 
         <main class="app-content py-3">
-            <div class="container">
+            <div class="container-fluid">
                 @yield('content')
             </div>
         </main>
 
         <footer>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="border-top pt-3">
                     <p style="text-align: center;">&copy; {{ date('Y') }} - {{ config('app.author') }}</p>
                 </div>
