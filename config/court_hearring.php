@@ -3,8 +3,8 @@
 return [
     'columns' => [
         [
-            'name' => 'Дата / Час',
-            'sortable' => true,
+            'name' => 'Час',
+            'sortable' => false,
             'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
             'borderColor' => 'rgba(255,99,132,1)',
             'borderWidth' => 1
@@ -17,14 +17,7 @@ return [
             'borderWidth' => 1
         ],
         [
-            'name' => 'Форма судочинства',
-            'sortable' => true,
-            'backgroundColor' => 'rgba(255, 159, 64, 0.2)',
-            'borderColor' => 'rgba(255, 159, 64, 1)',
-            'borderWidth' => 1
-        ],
-        [
-            'name' => 'Єдиний унікальний номер справи',
+            'name' => 'Номер справи',
             'sortable' => false,
             'backgroundColor' => 'rgba(255, 206, 86, 0.2)',
             'borderColor' => 'rgba(255, 206, 86, 1)',
@@ -45,15 +38,8 @@ return [
             'borderWidth' => 1
         ],
         [
-            'name' => 'Адреса',
+            'name' => 'Зал',
             'sortable' => false,
-            'backgroundColor' => 'rgba(255, 159, 64, 0.2)',
-            'borderColor' => 'rgba(255, 159, 64, 1)',
-            'borderWidth' => 1
-        ],
-        [
-            'name' => 'Зал судових засідань',
-            'sortable' => true,
             'backgroundColor' => 'rgba(255, 159, 64, 0.2)',
             'borderColor' => 'rgba(255, 159, 64, 1)',
             'borderWidth' => 1

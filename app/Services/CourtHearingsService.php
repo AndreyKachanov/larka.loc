@@ -211,9 +211,13 @@ class CourtHearingsService
         foreach ($columns as $column) {
             $columnKeys[] = $column['name'];
         }
-
+        //dump($columnKeys);
         foreach ($collection as $item) {
-            $arr[] = array_combine($columnKeys, $item);
+            //if ($key !== 'forma' || $key !== 'add_address') {
+                unset($item['forma']);
+                unset($item['add_address']);
+                $arr[] = array_combine($columnKeys, $item);
+            //}
         }
 
         return $arr;

@@ -19,7 +19,6 @@ class CourtHearingsController extends Controller
 
     public function hcac()
     {
-
         // Get court hearings for all days
         $data = $this->service->fetchData();
         // Get court hearings for current day
