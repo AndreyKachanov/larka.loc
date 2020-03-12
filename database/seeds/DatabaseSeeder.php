@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             $this->call(PermissionRolesTableSeeder::class);
             $this->call(PostsTableSeeder::class);
             $this->call(ContactsTableSeeder::class);
+            $this->call(CourtSessionsTableSeeder::class);
         }
     }
 }

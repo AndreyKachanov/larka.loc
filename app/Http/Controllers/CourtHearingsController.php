@@ -21,6 +21,7 @@ class CourtHearingsController extends Controller
     {
         // Get court hearings for all days
         $data = $this->service->fetchData();
+        dd($data);
         // Get court hearings for current day
         $currentDayItems = $this->service->getDataForCurrentDay($data);
         // Get court hearings more than current time and today

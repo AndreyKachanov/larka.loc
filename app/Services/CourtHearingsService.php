@@ -213,6 +213,7 @@ class CourtHearingsService
         }
         //dump($columnKeys);
         foreach ($collection as $item) {
+            $item['judge'] = str_replace(',', '<br>', $item['judge']);
             //if ($key !== 'forma' || $key !== 'add_address') {
                 unset($item['forma']);
                 unset($item['add_address']);
