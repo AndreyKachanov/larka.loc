@@ -44,9 +44,10 @@ class RedisService
         string $date,
         string $number,
         string $judges,
-        string $involved,
-        string $description,
-        int $room)
+        string $involved = null,
+        string $description = null,
+        int $room = null
+    )
     {
         $this->date = $date;
         $this->number = $number;
@@ -56,10 +57,13 @@ class RedisService
         $this->room = $room;
     }
 
+
     public function store()
     {
-        Redis::hmset('client:' . $this->date . '_' . $this->number, [
-            'id'      => $this->date,
+        $key = self::getKey($this->date, $this->number);
+        //dd($key);
+        Redis::hmset($key, [
+            'date'      => $this->date,
             'number' => $this->number,
             'judges' => $this->judges,
             'involved' => $this->involved,
@@ -75,8 +79,9 @@ class RedisService
      */
     public static function find($date, $number)
     {
-        $key = 'client:' . $date . '_' . $number;
+        $key = self::getKey($date, $number);
         $stored = Redis::hgetall($key);
+        //dd($stored);
         if (!empty($stored)) {
             return new self(
                 $stored['date'],
@@ -96,10 +101,13 @@ class RedisService
     public static function getAll()
     {
         $keys = Redis::keys('client:*');
+        //dd($keys);
         $clients = [];
         foreach ($keys as $key) {
+            dd($key);
             $stored = Redis::hgetall($key);
-            $client = new Client(
+            dd($stored);
+            $client = new self(
                 $stored['date'],
                 $stored['number'],
                 $stored['judges'],
@@ -108,7 +116,17 @@ class RedisService
                 $stored['room']
             );
             $clients[] = $client;
+            dd($client);
         }
         return $clients;
+    }
+
+    /**
+     * @param string $date
+     * @param string $number
+     * @return string
+     */
+    static public function getKey(string $date, string $number): string {
+        return 'client:' . strtotime($date) . '_' . str_replace('/', '_', $number);
     }
 }
