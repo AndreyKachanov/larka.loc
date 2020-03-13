@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CourtHearingsService;
+use App\Services\CourtSessions\CourtSessionsService;
 use Illuminate\Http\Request;
 
 class CourtHearingsController extends Controller
 {
     /**
-     * @var CourtHearingsService
+     * @var CourtSessionsService
      */
-    private CourtHearingsService $service;
+    private CourtSessionsService $service;
 
-    public function __construct(CourtHearingsService $service)
+    public function __construct(CourtSessionsService $service)
     {
         $this->service = $service;
     }
@@ -20,7 +20,8 @@ class CourtHearingsController extends Controller
     public function hcac()
     {
         // Get court hearings for all days
-        $data = $this->service->fetchData();
+        $data = $this->service->getData();
+        //dd($data);
         // Get court hearings for current day
         $currentDayItems = $this->service->getDataForCurrentDay($data);
         // Get court hearings more than current time and today
@@ -30,7 +31,7 @@ class CourtHearingsController extends Controller
         $fields = $this->service->getFields();
 
         //dump($fields);
-        $items = $this->service->convertItems($currentDayItems);
+        $items = $this->service->convertItems($moreCurrentDateItems);
         //dd($items);
 
         return view('court_hearings.hcac', [

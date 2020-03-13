@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\CourtSessions;
 
 
 use Carbon\Carbon;
@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 use Exception;
 use Illuminate\Support\Collection;
 
-class CourtHearingsService
+class CourtSessionsService
 {
     /**
      * @var Client
@@ -21,9 +21,9 @@ class CourtHearingsService
         $this->client = $client;
     }
 
-    public function fetchData(): Collection
+    public function getData(): Collection
     {
-        $dataForAllDays = [];
+        $data = [];
         $url = 'https://hcac.court.gov.ua/new.php';
         $method = 'POST';
         $headers = [
@@ -44,9 +44,9 @@ class CourtHearingsService
             'q_court_id' => '4910'
         ];
 
-        $dataForAllDays = $this->getResponseByGuzzleClient($method, $url, $headers, $formParams);
+        $data = $this->getResponseByGuzzleClient($method, $url, $headers, $formParams);
         //dd($data);
-        return collect($dataForAllDays);
+        return collect($data);
     }
 
     private function getResponseByGuzzleClient(string $method, string $url, array $headers, array $formParams): array
@@ -213,6 +213,7 @@ class CourtHearingsService
         }
         //dump($columnKeys);
         foreach ($collection as $item) {
+            $item['judge'] = str_replace(',', '<br>', $item['judge']);
             //if ($key !== 'forma' || $key !== 'add_address') {
                 unset($item['forma']);
                 unset($item['add_address']);
