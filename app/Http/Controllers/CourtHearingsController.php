@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\CourtSessions\CourtSessionsService;
+use App\Services\CourtSessions\RedisService;
 use Illuminate\Http\Request;
 
 class CourtHearingsController extends Controller
@@ -19,14 +20,7 @@ class CourtHearingsController extends Controller
 
     public function hcac()
     {
-        // Get court hearings for all days
-        $data = $this->service->getData();
-        //dd($data);
-        // Get court hearings for current day
-        $currentDayItems = $this->service->getDataForCurrentDay($data);
-        // Get court hearings more than current time and today
-        $moreCurrentDateItems = $this->service->getMoreCurrentDate($data);
-        //dd($moreCurrentDateItems);
+        dd(RedisService::getAll()->sortBy('key')->values());
 
         $fields = $this->service->getFields();
 

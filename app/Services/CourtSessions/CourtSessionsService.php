@@ -3,7 +3,6 @@
 
 namespace App\Services\CourtSessions;
 
-
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Exception;
@@ -23,6 +22,7 @@ class CourtSessionsService
 
     public function getItems(): Collection
     {
+        dump("get items");
         $data = [];
         $url = 'https://hcac.court.gov.ua/new.php';
         $method = 'POST';
@@ -63,7 +63,7 @@ class CourtSessionsService
             if (isset($arr['error'])) {
                 $error = $arr['error'];
                 $errorMsg = sprintf(
-                    'Response court hearrings has error. Error code - %d, error msg - %s. Class - %s, line - %d, query - %s',
+                    'Response by guzzle client for court sessions has error. Error code - %d, error msg - %s. Class - %s, line - %d, query - %s',
                     $error['error_code'],
                     $error['error_msg'],
                     __CLASS__,
@@ -88,7 +88,7 @@ class CourtSessionsService
     {
         $arr = [];
         $columns = config('court_hearring.columns');
-        foreach ($columns as $key => $value) {
+        foreach ($columns as $value) {
             $arr[] = [
                 'key' => $value['name'],
                 'sortable' => $value['sortable']
@@ -156,7 +156,7 @@ class CourtSessionsService
     //    ];
     //}
 
-    public function getDataForCurrentDay(Collection $collection): Collection
+    public function getCurrentDayItems(Collection $collection): Collection
     {
         $collection = $collection->filter(function ($item, $key) {
 
@@ -170,6 +170,18 @@ class CourtSessionsService
         //$collection = $collection->where('date', Carbon::today());
         //dd($collection);
         return $collection;
+    }
+
+    public function getFirstMondayItems(Collection $collection): Collection
+    {
+        $firstMonday = Carbon::now()->modify('next monday');
+        return $collection->filter(function ($item, $key) use ($firstMonday) {
+            $itemDate = $item['date'];
+            if (!isset($itemDate)) {
+                dd("No key 'date' in this key ->> " . $key);
+            }
+            return Carbon::parse($itemDate)->diffInDays($firstMonday) == 0;
+        });
     }
 
     public function getMoreCurrentTime(Collection $collection): Collection
@@ -239,7 +251,6 @@ class CourtSessionsService
                 $errorMessage = "The returned array has empty values => "  . print_r($item, true) ;
                 throw new Exception($errorMessage);
             }
-
         });
     }
 }

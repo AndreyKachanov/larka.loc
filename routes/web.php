@@ -5,7 +5,7 @@ use App\Entity\User\Permission;
 use App\Entity\User\User;
 use App\Http\Controllers\CourtHearingsController;
 use App\Http\Controllers\HomeController;
-use App\Http\Middleware\GetCourtSessions;
+use App\Http\Middleware\SetCourtSessionsToRedis;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Entity\User\Role;
@@ -120,7 +120,7 @@ Route::get('test7', function() {
 
 Route::get('hcac', [CourtHearingsController::class, 'hcac'])
     ->name('hcac')
-    ->middleware(GetCourtSessions::class);
+    ->middleware(SetCourtSessionsToRedis::class);
 
 
 Route::get('apel_hcac', [CourtHearingsController::class, 'apel_hcac'])->name('apel_hcac');

@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\GetCourtSessions;
+use App\Http\Middleware\SetCourtSessionsToRedis;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'court_sessions' => GetCourtSessions::class,
+        'court_sessions' => SetCourtSessionsToRedis::class,
     ];
 
     /**
