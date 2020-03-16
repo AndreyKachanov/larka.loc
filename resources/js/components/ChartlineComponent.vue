@@ -5,13 +5,19 @@
                 <div class="chartjs">
                     <b-table
                             id="table-transition-example"
-                            :fields="fields"
-                            :items="items"
+                            :fields="fieldsForTable"
+                            :items="itemsForTable"
                             striped
                             small
-                            :primary-key="firstCell"
+                            :primary-key="primaryKey"
                             :tbody-transition-props="transProps"
-                    ></b-table>
+                    >
+                        <template v-slot:cell(Зал)="row">
+                            <b-form-input v-on:change="changeRoomNumber($event, row.item)" v-model="row.item.Зал"/>
+                        </template>
+
+                    </b-table>
+
                 </div>
             </div>
         </div>
@@ -22,27 +28,23 @@
     export default {
         props: ['fields', 'items'],
 
-        data: function () {
+        data() {
             return {
                 // dataForChartJs: this.data,
-                firstCell: 'Єдиний унікальний номер справи',
-                fieldsForTable: [
-                    { key: 'age', sortable: true },
-                    { key: 'last_name', sortable: true },
-                    { key: 'first_name', sortable: true },
-                    { key: 'isActive', sortable: true }
-                ],
-                itemsForTable: [
-                    { age: 40, isActive: true,  first_name: 'Dickerson', last_name: 'Macdonald' },
-                    { age: 21, isActive: false,  first_name: 'Larsen', last_name: 'Shaw' },
-                    { age: 89, isActive: false,  first_name: 'Geneva', last_name: 'Wilson' },
-                    { age: 38, isActive: true,  first_name: 'Jami', last_name: 'Carney' }
-                ],
+                primaryKey: 'Сторони по справі',
+                fieldsForTable: this.fields,
+                itemsForTable: this.items,
                 transProps: {
                     // Transition name
                     name: 'flip-list'
                 }
             };
         },
+
+        methods: {
+            changeRoomNumber(e, item){
+                console.log(item);
+            },
+        }
     }
 </script>

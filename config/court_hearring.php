@@ -4,7 +4,7 @@ return [
     'columns' => [
         [
             'name' => 'Час',
-            'sortable' => false,
+            'sortable' => true,
             'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
             'borderColor' => 'rgba(255,99,132,1)',
             'borderWidth' => 1
@@ -39,7 +39,7 @@ return [
         ],
         [
             'name' => 'Зал',
-            'sortable' => false,
+            'sortable' => true,
             'backgroundColor' => 'rgba(255, 159, 64, 0.2)',
             'borderColor' => 'rgba(255, 159, 64, 1)',
             'borderWidth' => 1

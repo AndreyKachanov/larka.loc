@@ -20,7 +20,7 @@ class CourtSessionsService
         $this->client = $client;
     }
 
-    public function getItems(): Collection
+    public function fetchItems(): Collection
     {
         dump("get items");
         $data = [];
@@ -96,6 +96,29 @@ class CourtSessionsService
         }
 
         return $arr;
+    }
+
+    public function getItemsFromRedis(): array
+    {
+        $currentDay = Carbon::now();
+        //dd($currentDay->dayOfWeek);
+        $itemsFromRedis = RedisService::getAll()->sortBy('key')->values();
+
+        //Если сегодня не суббота и не воскресенье - извлекаем данные за текущий день
+        if ($currentDay->dayOfWeek === 6 || $currentDay->dayOfWeek === 0) {
+            //dd('суббота воскр');
+            $courtSessions = $this->getFirstMondayItems($itemsFromRedis);
+            //dd($courtSessions);
+        }
+        //иначе за первый понедельник
+        else {
+            //dd('пн - пт');
+
+            $courtSessions = $this->getCurrentDayItems($itemsFromRedis);
+        }
+
+        return $this->convertItems($courtSessions);
+
     }
 
     //public function getItems(array $arr): array
@@ -218,21 +241,27 @@ class CourtSessionsService
 
     public function convertItems(Collection $collection): array
     {
+        //dd($collection);
         $arr = [];
         $columns = config('court_hearring.columns');
         foreach ($columns as $column) {
             $columnKeys[] = $column['name'];
         }
         //dump($columnKeys);
+        //dump($columnKeys);
         foreach ($collection as $item) {
-            $item['judge'] = str_replace(',', '<br>', $item['judge']);
+            //dd($this->sortArrayKeys($item));
+            //dd($item);
+            //$item['judge'] = str_replace(',', '<br>', $item['judge']);
             //if ($key !== 'forma' || $key !== 'add_address') {
-                unset($item['forma']);
-                unset($item['add_address']);
-                $arr[] = array_combine($columnKeys, $item);
+                unset($item['key']);
+                //unset($item['add_address']);
+            //    dump($columnKeys);
+            //    dd($item);
+                $arr[] = array_combine($columnKeys, $this->sortArrayKeys($item));
             //}
         }
-
+        //dd($arr);
         return $arr;
     }
 
@@ -252,5 +281,22 @@ class CourtSessionsService
                 throw new Exception($errorMessage);
             }
         });
+    }
+
+    private function sortArrayKeys(array $item): array
+    {
+        //dump($item);
+        $order = [
+            'date',
+            'judges',
+            'number',
+            'involved',
+            'description',
+            'room'
+        ];
+
+        //dd(array_replace(array_flip($order), $item));
+
+        return array_replace(array_flip($order), $item);
     }
 }

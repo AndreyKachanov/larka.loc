@@ -3,7 +3,7 @@
 use App\Entity\Contact;
 use App\Entity\User\Permission;
 use App\Entity\User\User;
-use App\Http\Controllers\CourtHearingsController;
+use App\Http\Controllers\CourtSessionsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\SetCourtSessionsToRedis;
 use Illuminate\Support\Facades\Route;
@@ -118,12 +118,12 @@ Route::get('test7', function() {
     curl_close($ch);
 });
 
-Route::get('hcac', [CourtHearingsController::class, 'hcac'])
+Route::get('hcac', [CourtSessionsController::class, 'hcac'])
     ->name('hcac')
     ->middleware(SetCourtSessionsToRedis::class);
 
 
-Route::get('apel_hcac', [CourtHearingsController::class, 'apel_hcac'])->name('apel_hcac');
+Route::get('apel_hcac', [CourtSessionsController::class, 'apel_hcac'])->name('apel_hcac');
 //
 //Route::view('test5', 'layouts.dashboard', [
 //    'users' => User::all()

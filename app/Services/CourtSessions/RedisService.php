@@ -110,6 +110,7 @@ class RedisService
      */
     public static function getAll(): Collection
     {
+        //dump("get from redis");
         $keys = Redis::keys(self::$prefix . '*');
         //dump($keys);
         $courtSessions = [];

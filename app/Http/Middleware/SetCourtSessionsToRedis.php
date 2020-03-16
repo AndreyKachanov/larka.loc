@@ -7,7 +7,6 @@ use App\Services\CourtSessions\RedisService;
 use Carbon\Carbon;
 use Closure;
 use Exception;
-use Illuminate\Support\Facades\Redis;
 
 class SetCourtSessionsToRedis
 {
@@ -28,8 +27,19 @@ class SetCourtSessionsToRedis
      */
     public function handle($request, Closure $next)
     {
-        $fetchedItems = $this->service->getItems();
-        dd($fetchedItems);
+        if (RedisService::getCountKeys() === 0) {
+            $fetchedItems = $this->service->fetchItems();
+            RedisService::insertToRedis($fetchedItems);
+        }
+
+        return $next($request);
+        //else {
+        //    dd(RedisService::getAll()->sortBy('key')->values());
+        //}
+
+
+        //RedisService::removeOldKeys();
+
         //dd(config('database.redis.options.prefix'));
         //dd(RedisService::getAll());
         //dd(Redis::hgetall("shop:{$shopId}:sales"););
