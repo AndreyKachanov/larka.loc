@@ -26,7 +26,7 @@
 
 <script>
     export default {
-        props: ['fields', 'items'],
+        props: ['fields', 'items', 'route_room_number'],
 
         data() {
             return {
@@ -43,7 +43,23 @@
 
         methods: {
             changeRoomNumber(e, item){
-                console.log(item);
+                axios.post(this.route_room_number, item).then((response) => {
+                    console.log(response);
+                    // setTimeout(() => loader.hide(), 1200);
+                    // this.errors = [];
+                }).catch(error => {
+                    // loader.hide();
+                    // this.errors = error.response.data.errors;
+                    // if (typeof this.errors.keywords !== 'undefined') {
+                    //     if (this.radio_keywords === 'buy')  {
+                    //         this.error_keywords_buy = true;
+                    //         this.error_keywords_sale = false;
+                    //     } else {
+                    //         this.error_keywords_sale = true;
+                    //         this.error_keywords_buy = false;
+                    //     }
+                    // }
+                }).then(() => {});
             },
         }
     }

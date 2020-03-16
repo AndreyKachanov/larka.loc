@@ -51,6 +51,11 @@ class CourtSessionsController extends Controller
         ]);
     }
 
+    public function setRoomNumber(Request $request)
+    {
+        dd($request[]);
+    }
+
     public function apel_hcac()
     {
         dd(2);

@@ -6,6 +6,7 @@
             <chartline-component
                 :fields="{{ json_encode($fields) }}"
                 :items="{{ json_encode($items) }}"
+                route_room_number="{{route('change_room_number')}}"
             >
             </chartline-component>
         </div>

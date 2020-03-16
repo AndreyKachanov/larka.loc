@@ -124,6 +124,7 @@ Route::get('hcac', [CourtSessionsController::class, 'hcac'])
 
 
 Route::get('apel_hcac', [CourtSessionsController::class, 'apel_hcac'])->name('apel_hcac');
+Route::post('change_room_number', [CourtSessionsController::class, 'setRoomNumber'])->name('change_room_number');
 //
 //Route::view('test5', 'layouts.dashboard', [
 //    'users' => User::all()

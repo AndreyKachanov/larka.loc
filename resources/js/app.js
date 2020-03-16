@@ -6,6 +6,7 @@ Vue.config.productionTip = false;
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 
+
 import Vue from 'vue'
 
 Vue.component('chartline-component', require('./components/ChartlineComponent.vue').default);
