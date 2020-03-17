@@ -21,7 +21,9 @@ class CourtSessionsController extends Controller
     public function hcac()
     {
         $fields = $this->service->getFields();
-        $items = $this->service->getItemsFromRedis();
+        //$items = $this->service->getCurrentDayItemsFromRedis();
+        $items = $this->service->getCurrentTimeItemsFromRedis();
+        //dd($items);
         //$items1[0] = $items[0];
         //$items1[1] = $items[1];
 
@@ -53,7 +55,18 @@ class CourtSessionsController extends Controller
 
     public function setRoomNumber(Request $request)
     {
-        dd($request[]);
+        if (isset($request->key)) {
+            $keyFromRequest = $request->key;
+            $roomFromRequest = $request->Зал;
+
+            $itemsFromRedis = $this->service->getItemsFromRedis();
+            $itemsFromRedis->transform(function ($item) use ($keyFromRequest, $roomFromRequest) {
+                $item['courtroom'] = ($item['key'] === $keyFromRequest) ? $roomFromRequest : $item['courtroom'];
+                return $item;
+            });
+
+            RedisService::insertToRedis($itemsFromRedis);
+        }
     }
 
     public function apel_hcac()

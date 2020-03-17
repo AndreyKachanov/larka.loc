@@ -69,15 +69,15 @@ class RedisService
     public function store()
     {
         $key = self::getKey($this->date, $this->number);
-        //dd($key);
+        //dump($key);
         Redis::hmset($key, [
-            'key'          => $this->key,
+            'key'         => $this->key,
             'date'        => $this->date,
             'number'      => $this->number,
-            'judges'      => $this->judges,
+            'judge'      => $this->judges,
             'involved'    => $this->involved,
             'description' => $this->description,
-            'room'        => $this->room
+            'courtroom'        => $this->room
         ]);
     }
 
@@ -162,11 +162,14 @@ class RedisService
         return count(Redis::keys(self::$prefix . '*'));
     }
 
+    /**
+     * @param Collection $courtSessions
+     */
     public static function insertToRedis(Collection $courtSessions)
     {
-        dump("insert");
+        dump("insert to redis");
         foreach ($courtSessions as $key => $item) {
-            //dd($key);
+            //dd($item);
             $courtSession = new self(
                 $key,
                 $item['date'],

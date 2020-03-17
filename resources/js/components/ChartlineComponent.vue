@@ -31,7 +31,7 @@
         data() {
             return {
                 // dataForChartJs: this.data,
-                primaryKey: 'Сторони по справі',
+                primaryKey: 'key',
                 fieldsForTable: this.fields,
                 itemsForTable: this.items,
                 transProps: {
@@ -43,6 +43,8 @@
 
         methods: {
             changeRoomNumber(e, item){
+                // let obj = {};
+                // obj['item'] = item;
                 axios.post(this.route_room_number, item).then((response) => {
                     console.log(response);
                     // setTimeout(() => loader.hide(), 1200);

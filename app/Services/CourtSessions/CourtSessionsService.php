@@ -22,7 +22,7 @@ class CourtSessionsService
 
     public function fetchItems(): Collection
     {
-        dump("get items");
+        dump("get items from court.gov.ua");
         $data = [];
         $url = 'https://hcac.court.gov.ua/new.php';
         $method = 'POST';
@@ -98,7 +98,7 @@ class CourtSessionsService
         return $arr;
     }
 
-    public function getItemsFromRedis(): array
+    public function getCurrentDayItemsFromRedis(): array
     {
         $currentDay = Carbon::now();
         //dd($currentDay->dayOfWeek);
@@ -119,6 +119,34 @@ class CourtSessionsService
 
         return $this->convertItems($courtSessions);
 
+    }
+
+    public function getCurrentTimeItemsFromRedis(): array
+    {
+        $currentDay = Carbon::now();
+        //dd($currentDay->dayOfWeek);
+        $itemsFromRedis = RedisService::getAll()->sortBy('key')->values();
+
+        //Если сегодня не суббота и не воскресенье - извлекаем данные за текущий день
+        if ($currentDay->dayOfWeek === 6 || $currentDay->dayOfWeek === 0) {
+            //dd('суббота воскр');
+            $courtSessions = $this->getFirstMondayItems($itemsFromRedis);
+            //dd($courtSessions);
+        }
+        //иначе за первый понедельник
+        else {
+            //dd('пн - пт');
+
+            $courtSessions = $this->getMoreCurrentTime($itemsFromRedis);
+        }
+
+        return $this->convertItems($courtSessions);
+
+    }
+
+    public function getItemsFromRedis(): Collection
+    {
+        return RedisService::getAll()->sortBy('key')->values();
     }
 
     //public function getItems(array $arr): array
@@ -214,26 +242,12 @@ class CourtSessionsService
             if (!isset($item['date'])) {
                 dd("No key 'date' in this key ->> " . $key);
             }
-
-            //$item['date'] = '10.03.2020 15:08';
-
             $dateInCollection = Carbon::parse($item['date']);
 
             $isToday = Carbon::parse($item['date'])->isToday();
             $greaterCurrent = $dateInCollection->greaterThan(Carbon::now());
 
             return $isToday && $greaterCurrent;
-            //
-            //dump($isToday);
-            //dd($greaterCurrent);
-
-            //dd(Carbon::parse($item['date'])->greaterThan(Carbon::now()));
-            //dump(Carbon::parse($item['date']));
-            //dump(Carbon::now());
-
-
-
-            //return $isToday;
         });
 
         return $collection;
@@ -247,17 +261,18 @@ class CourtSessionsService
         foreach ($columns as $column) {
             $columnKeys[] = $column['name'];
         }
+        $columnKeys[] = 'key';
         //dump($columnKeys);
         //dump($columnKeys);
         foreach ($collection as $item) {
             //dd($this->sortArrayKeys($item));
-            //dd($item);
+            //dump($item);
             //$item['judge'] = str_replace(',', '<br>', $item['judge']);
             //if ($key !== 'forma' || $key !== 'add_address') {
-                unset($item['key']);
+            //    unset($item['key']);
                 //unset($item['add_address']);
-            //    dump($columnKeys);
-            //    dd($item);
+                //dump($columnKeys);
+                //dd($this->sortArrayKeys($item));
                 $arr[] = array_combine($columnKeys, $this->sortArrayKeys($item));
             //}
         }
@@ -288,11 +303,11 @@ class CourtSessionsService
         //dump($item);
         $order = [
             'date',
-            'judges',
+            'judge',
             'number',
             'involved',
             'description',
-            'room'
+            'courtroom'
         ];
 
         //dd(array_replace(array_flip($order), $item));
