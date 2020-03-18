@@ -29,6 +29,8 @@ class SetCourtSessionsToRedis
     {
         if (RedisService::getCountKeys() === 0) {
             $fetchedItems = $this->service->fetchItems();
+            //dd($fetchedItems);
+            $this->service->checkFetchedItems($fetchedItems);
             RedisService::insertToRedis($fetchedItems);
         }
 

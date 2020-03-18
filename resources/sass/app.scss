@@ -125,6 +125,8 @@ body {
         font-size: 14px !important;
         word-break: break-word;
         font-weight: bold !important;
+        text-align: center;
+        vertical-align: middle;
     }
 
     td {
@@ -204,8 +206,14 @@ body {
         min-height: 100% !important;
         height: 100% !important;
     }
+
+}
+
+.table.b-table.table-sm > thead > tr > [aria-sort]:not(.b-table-sort-icon-left),
+.table.b-table.table-sm > tfoot > tr > [aria-sort]:not(.b-table-sort-icon-left) {
+    background-position: right calc(1rem / 2) center;
 }
 
 table#table-transition-example .flip-list-move {
-    transition: transform 1s;
+    transition: transformид 1s;
 }

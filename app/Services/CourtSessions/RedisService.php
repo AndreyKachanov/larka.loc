@@ -29,9 +29,9 @@ class RedisService
      */
     private string $description;
     /**
-     * @var int
+     * @var string
      */
-    private int $room;
+    private string $room;
     /**
      * @var string
      */
@@ -45,7 +45,7 @@ class RedisService
      * @param string $judges
      * @param string|null $involved
      * @param string|null $description
-     * @param int|null $room
+     * @param string|null $room
      */
     public function __construct(
         int $key,
@@ -54,7 +54,7 @@ class RedisService
         string $judges,
         string $involved = null,
         string $description = null,
-        int $room = null
+        string $room = null
     ) {
         $this->key = $key;
         $this->date = $date;
@@ -77,7 +77,7 @@ class RedisService
             'judge'      => $this->judges,
             'involved'    => $this->involved,
             'description' => $this->description,
-            'courtroom'        => $this->room
+            'courtroom'   => $this->room
         ]);
     }
 
@@ -177,7 +177,7 @@ class RedisService
                 $item['judge'],
                 $item['involved'],
                 $item['description'],
-                (int)$item['courtroom']
+                $item['courtroom']
             );
             $courtSession->store();
         }

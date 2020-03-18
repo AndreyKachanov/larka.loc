@@ -31,7 +31,7 @@
         data() {
             return {
                 // dataForChartJs: this.data,
-                primaryKey: 'key',
+                primaryKey: 'Номер справи',
                 fieldsForTable: this.fields,
                 itemsForTable: this.items,
                 transProps: {

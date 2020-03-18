@@ -23,7 +23,7 @@ class CourtSessionsController extends Controller
         $fields = $this->service->getFields();
         //$items = $this->service->getCurrentDayItemsFromRedis();
         $items = $this->service->getCurrentTimeItemsFromRedis();
-        //dd($items);
+        //dd($fields);
         //$items1[0] = $items[0];
         //$items1[1] = $items[1];
 
