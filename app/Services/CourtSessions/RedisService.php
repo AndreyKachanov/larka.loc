@@ -37,6 +37,7 @@ class RedisService
      * @var string
      */
     private  string $address;
+
     /**
      * @var string
      */

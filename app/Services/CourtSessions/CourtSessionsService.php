@@ -271,9 +271,9 @@ class CourtSessionsService
             //dd($this->sortArrayKeys($item));
             //dd($item);
 
-            //if ($item['add_address'] !== '01601, Київ, Хрещатик, 42а') {
+            if ($item['add_address'] !== '01601, Київ, Хрещатик, 42а') {
                 $arr[] = array_combine($columnKeys, $this->sortArrayKeys($item));
-            //}
+            }
 
 
             //dump($item);

@@ -83,9 +83,9 @@
             }
         },
         mounted() {
-            this.removeItems();
-            const ONE_MINUTE = 60000;
-            this.timer = setInterval(this.removeItems, ONE_MINUTE);
+            // this.removeItems();
+            // const ONE_MINUTE = 60000;
+            // this.timer = setInterval(this.removeItems, ONE_MINUTE);
         }
     }
 </script>
