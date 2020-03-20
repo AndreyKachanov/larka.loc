@@ -117,6 +117,7 @@ class CourtSessionsService
             $courtSessions = $this->getCurrentDayItems($itemsFromRedis);
         }
 
+        //dd($courtSessions);
         return $this->convertItems($courtSessions);
 
     }
@@ -261,10 +262,23 @@ class CourtSessionsService
         foreach ($columns as $column) {
             $columnKeys[] = $column['name'];
         }
+        $columnKeys[] = 'Адреса';
         $columnKeys[] = 'key';
         //dump($columnKeys);
         //dump($columnKeys);
         foreach ($collection as $item) {
+            //dump($columnKeys);
+            //dd($this->sortArrayKeys($item));
+            //dd($item);
+
+            //if ($item['add_address'] !== '01601, Київ, Хрещатик, 42а') {
+                $arr[] = array_combine($columnKeys, $this->sortArrayKeys($item));
+            //}
+
+
+            //dump($item);
+            //$item['date'] = Carbon::parse($item['date'])->format('Y-m-d H:i:s');
+            //dd($item);
             //dd($this->sortArrayKeys($item));
             //dump($item);
             //$item['judge'] = str_replace(',', '<br>', $item['judge']);
@@ -273,7 +287,7 @@ class CourtSessionsService
                 //unset($item['add_address']);
                 //dump($columnKeys);
                 //dd($this->sortArrayKeys($item));
-                $arr[] = array_combine($columnKeys, $this->sortArrayKeys($item));
+                //$arr[] = array_combine($columnKeys, $this->sortArrayKeys($item));
             //}
         }
         //dd($arr);
@@ -307,11 +321,14 @@ class CourtSessionsService
             'number',
             'involved',
             'description',
-            'courtroom'
+            'courtroom',
+            'add_address',
         ];
 
         //dd(array_replace(array_flip($order), $item));
-
+        //dump($order);
+        //dump($item);
+        //dd(array_replace(array_flip($order), $item));
         return array_replace(array_flip($order), $item);
     }
 }

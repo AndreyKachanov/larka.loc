@@ -15,9 +15,7 @@
                         <template v-slot:cell(Зал)="row">
                             <b-form-input v-on:change="changeRoomNumber($event, row.item)" v-model="row.item.Зал"/>
                         </template>
-
                     </b-table>
-
                 </div>
             </div>
         </div>
@@ -30,14 +28,14 @@
 
         data() {
             return {
-                // dataForChartJs: this.data,
-                primaryKey: 'Номер справи',
+                primaryKey: 'key',
                 fieldsForTable: this.fields,
                 itemsForTable: this.items,
                 transProps: {
                     // Transition name
                     name: 'flip-list'
-                }
+                },
+                intervalId: null,
             };
         },
 
@@ -63,6 +61,31 @@
                     // }
                 }).then(() => {});
             },
+            removeItems(){
+                const length = this.itemsForTable.length;
+                const now = Date.now();
+                this.itemsForTable = this.itemsForTable.filter(item =>  this.parseDate(item['Час']) > now);
+
+                if (length !== this.itemsForTable.length) {
+                    console.log('changes!', this.itemsForTable);
+                }
+
+                if (this.itemsForTable.length === 0) {
+                    clearInterval(this.intervalId);
+                }
+
+            },
+            parseDate(str) {
+                const [date, time] = str.split(' ');
+                const [day, month, year] = date.split('.');
+
+                return new Date(`${year}-${month}-${day} ${time}`);
+            }
+        },
+        mounted() {
+            this.removeItems();
+            const ONE_MINUTE = 60000;
+            this.timer = setInterval(this.removeItems, ONE_MINUTE);
         }
     }
 </script>

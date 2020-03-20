@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CourtSessions\CourtSessionsService;
 use App\Services\CourtSessions\RedisService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CourtSessionsController extends Controller
@@ -21,15 +22,24 @@ class CourtSessionsController extends Controller
     public function hcac()
     {
         $fields = $this->service->getFields();
-        //$items = $this->service->getCurrentDayItemsFromRedis();
-        $items = $this->service->getCurrentTimeItemsFromRedis();
+        //$fields[] = [
+        //    'key' => 'key',
+        //    'sortable' => true
+        //];
         //dd($fields);
+        $items = $this->service->getCurrentDayItemsFromRedis();
+        //$items = $this->service->getCurrentTimeItemsFromRedis();
+        //dd($items);
+
+        //dd(Carbon::parse($items[0]['Час'])->format('Y-m-d H:i:s'));
+        //$items = array_slice($items, 0, 3);
+
         //$items1[0] = $items[0];
         //$items1[1] = $items[1];
 
         //$items = [
         //    [
-        //        "Час" => "16.03.2020 09:00",
+        //        "Час" => "2020-03-20 10:30:00",
         //        "Склад суду" => " Біцюк А.В.",
         //        "Номер справи" => "991/2200/20",
         //        "Сторони по справі"=> "",
@@ -37,7 +47,7 @@ class CourtSessionsController extends Controller
         //        "Зал"=>  "5"
         //    ],
         //    [
-        //        "Час" => "16.03.2020 09:05",
+        //        "Час" => "2020-03-20 10:31:00",
         //        "Склад суду" => " Біцюк А.В.",
         //        "Номер справи" => "991/2200/20",
         //        "Сторони по справі"=> "",
