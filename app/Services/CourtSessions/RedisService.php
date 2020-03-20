@@ -36,7 +36,7 @@ class RedisService
     /**
      * @var string
      */
-    private  string $address;
+    private string $address;
 
     /**
      * @var string
@@ -62,7 +62,7 @@ class RedisService
         string $involved = null,
         string $description = null,
         string $room = null,
-        string  $address = null
+        string $address = null
     ) {
         $this->key = $key;
         $this->date = $date;
@@ -83,11 +83,11 @@ class RedisService
             'key'         => $this->key,
             'date'        => $this->date,
             'number'      => $this->number,
-            'judge'      => $this->judges,
-            'involved'    => $this->involved,
-            'description' => $this->description,
-            'courtroom'   => $this->room,
-            'add_address' => $this->address,
+            'judge'       => trim($this->judges),
+            'involved'    => trim($this->involved),
+            'description' => trim($this->description),
+            'courtroom'   => trim($this->room),
+            'add_address' => trim($this->address),
         ]);
     }
 
@@ -114,34 +114,18 @@ class RedisService
         }
         return false;
     }
-
-
+    
     /**
      * @return Collection
      */
     public static function getAll(): Collection
     {
-        //dump("get from redis");
         $keys = Redis::keys(self::$prefix . '*');
-        //dump($keys);
         $courtSessions = [];
         $frameworkPrefix = config('database.redis.options.prefix');
         foreach ($keys as $key) {
-            //dd($key);
-            //dd($prefix);
-            //dd(explode($prefix, $key));
             $stored = Redis::hgetall(explode($frameworkPrefix, $key)[1]);
-            //dd($stored);
-            //$client = new self(
-            //    $stored['date'],
-            //    $stored['number'],
-            //    $stored['judges'],
-            //    $stored['involved'],
-            //    $stored['description'],
-            //    $stored['room']
-            //);
             $courtSessions[] = $stored;
-            //dd($client);
         }
         return collect($courtSessions);
     }
@@ -180,7 +164,6 @@ class RedisService
     {
         dump("insert to redis");
         foreach ($courtSessions as $key => $item) {
-            //dd($item);
             $courtSession = new self(
                 $key,
                 $item['date'],
