@@ -28,7 +28,7 @@
         "font-awesome": "^4.7.0",
         "@trevoreyre/autocomplete-vue": "^2.0.2",
         "bootstrap-vue": "^2.0.0-rc.25",
-        "chart.js": "^2.8.0",
+        "chart.js": "^2.9.4",
         "chartjs-plugin-datalabels": "^0.6.0",
         "pusher-js": "^4.4.0",
         "socket.io-client": "^2.2.0",
